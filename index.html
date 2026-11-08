@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El ciclo de vida de las estrellas</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #101318;
+    color: #e1e5eb;
+    font-family: Georgia, serif;
+    line-height: 1.7;
+}
+
+header {
+    text-align: center;
+    padding: 35px 15px;
+    background: linear-gradient(135deg, #080b10, #172b42, #244d70);
+    color: #ffffff;
+    border-bottom: 2px solid #3979a8;
+}
+
+h1 {
+    font-size: 30px;
+    color: #dceeff;
+    margin: 0;
+}
+
+header p {
+    color: #c0d2e2;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 8px;
+    background: #191e26;
+    border-bottom: 1px solid #3b5268;
+}
+
+nav a {
+    color: #9bcdf4;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+nav a:hover,
+nav a.activo {
+    background: #294963;
+    color: white;
+}
+
+.marquesina {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px;
+    color: #c5e5ff;
+    background: #172b42;
+    border-bottom: 1px solid #3979a8;
+    font-weight: bold;
+}
+
+.marquesina span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: moverTexto 14s linear infinite;
+}
+
+@keyframes moverTexto {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 25px 18px;
+}
+
+section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #1b2028;
+    border: 1px solid #46515e;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #8dc7f2;
+    font-size: 25px;
+}
+
+h3 {
+    color: #a9d9ff;
+}
+
+p, li {
+    color: #d5d9df;
+}
+
+strong {
+    color: #a9d9ff;
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 550px;
+    height: 280px;
+    object-fit: cover;
+    margin: 20px auto;
+    border: 2px solid #526d85;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(57, 121, 168, 0.3);
+}
+
+.boton,
+button {
+    display: inline-block;
+    margin: 12px 5px 5px 0;
+    padding: 10px 18px;
+    background: #24577f;
+    color: white;
+    text-decoration: none;
+    border: 1px solid #6da9d6;
+    border-radius: 7px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.boton:hover,
+button:hover {
+    background: #3679aa;
+}
+
+.boton.secundario {
+    background: #303b49;
+}
+
+.pagina {
+    display: none;
+}
+
+.pagina.activa {
+    display: block;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    color: #a9d9ff;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font: inherit;
+    color: white;
+    background: #11161d;
+    border: 1px solid #526d85;
+    border-radius: 6px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca9b7;
+}
+
+.mensaje {
+    color: #a9d9ff;
+    font-weight: bold;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: #151c25;
+    text-align: center;
+}
+
+caption {
+    padding: 10px;
+    color: #c5e5ff;
+    font-weight: bold;
+}
+
+th,
+td {
+    border: 2px solid #66829c;
+    padding: 12px;
+}
+
+th {
+    color: #ffffff;
+    background: #24577f;
+}
+
+tbody tr:nth-child(even) {
+    background: #222e3a;
+}
+
+tbody tr:hover {
+    background: #294963;
+}
+
+.navegacion-paginas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+footer {
+    text-align: center;
+    background: #191e26;
+    color: #b9c5d1;
+    border-top: 2px solid #3b5268;
+    padding: 15px;
+}
+
+footer p {
+    color: #b9c5d1;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 25px;
+    }
+
+    nav {
+        gap: 3px;
+    }
+
+    nav a {
+        padding: 7px;
+        font-size: 13px;
+    }
+
+    section {
+        padding: 14px;
+    }
+
+    img {
+        height: 220px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .navegacion-paginas {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>El ciclo de vida de las estrellas</h1>
+</header>
+
+<nav>
+    <a href="#inicio" class="activo" onclick="mostrarPagina('inicio', this)">Inicio</a>
+    <a href="#contenido" onclick="mostrarPagina('contenido', this)">Contenido principal</a>
+    <a href="#informacion" onclick="mostrarPagina('informacion', this)">Información adicional</a>
+    <a href="#contacto" onclick="mostrarPagina('contacto', this)">Contacto</a>
+</nav>
+
+<!-- PÁGINA 1: INICIO -->
+
+<div id="inicio" class="pagina activa">
+
+    <div class="marquesina"><span>✦ El universo está lleno de estrellas que nacen, evolucionan y se transforman ✦</span></div>
+
+    <main>
+        <section>
+            <h2>Bienvenidos al universo estelar</h2>
+
+            <p>
+                Las estrellas son enormes esferas de gas que producen luz
+                y energía. A lo largo de su existencia pasan por diferentes
+                etapas, desde su nacimiento hasta su transformación final.
+            </p>
+
+            <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1000&q=80" alt="El universo y las estrellas">
+
+            <p>
+                En esta página conocerás cómo se forman las estrellas,
+                cómo viven y qué sucede cuando llegan al final de su vida.
+            </p>
+
+            <a class="boton" href="#contenido"
+               onclick="mostrarPagina('contenido')">
+                Explorar contenido
+            </a>
+        </section>
+    </main>
+</div>
+
+<!-- PÁGINA 2: CONTENIDO PRINCIPAL -->
+
+<div id="contenido" class="pagina">
+
+    <div class="marquesina"><span>✧ Cada estrella tiene una historia diferente ✧</span></div>
+
+    <main>
+        <h2>Contenido principal</h2>
+        <p>Conoce las principales etapas de la vida de una estrella.</p>
+
+        <section>
+            <h2>1. Nacimiento de las estrellas</h2>
+
+            <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1000&q=80" alt="Nebulosa donde se forman estrellas">
+
+            <p>El ciclo comienza en el medio interestelar, dentro de gigantescas nubes de gas y polvo compuestas principalmente de hidrógeno y helio, conocidas como nebulosas moleculares.</p>
+            <p>Colapso gravitacional: Una perturbación externa como la onda expansiva de una supernova cercana o el paso de otra nube hace que regiones densas de la nebulosa comiencen a colapsar bajo su propia gravedad.</p>
+            <p>Formación de la protoestrella: A medida que el gas se contrae, gira más rápido y se calienta intensamente debido a la fricción y a la compresión, formando una protoestrella en su centro, rodeada por un disco de acreción de material sobrante.</p>
+            <p>Encendido nuclear (Fusión): Cuando el núcleo alcanza temperaturas de unos 10 millones de grados Celsius, la presión y la temperatura se vuelven tan extremas que los átomos de hidrógeno empiezan a fusionarse para formar helio. Este proceso libera una cantidad colosal de energía en forma de luz y calor, deteniendo el colapso gravitacional y naciendo oficialmente una estrella en la Secuencia Principal.</p>
+
+            <p>
+                <strong>Dato científico:</strong>
+                Durante sus primeras etapas, algunas protoestrellas (conocidas como objetos Herbig-Haro) disparan chorros gemelos de gas supersónico desde sus polos a velocidades de cientos de kilómetros por segundo, perforando la nube de gas circundante como si fueran sables láser cósmicos.
+            </p>
+        </section>
+
+        <section>
+            <h2>2. La vida de las estrellas</h2>
+
+            <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?auto=format&fit=crop&w=1000&q=80" alt="Una estrella durante su vida">
+
+            <p>Durante esta etapa, la estrella vive en un delicado y perfecto equilibrio cósmico llamado equilibrio hidrostático:</p>
+            <p>La lucha de fuerzas: Por un lado, la gravedad intenta constantemente colapsar la estrella hacia su centro. Por el otro, la presión de la radiación y el calor generados por la fusión nuclear en el núcleo empujan violentamente hacia afuera.</p>
+            <p>Estabilidad: Ambas fuerzas se contrarrestan exactamente igual. Gracias a este "empate", la estrella brilla de forma estable, constante y calmada durante miles de millones de años (en el caso de nuestro Sol).</p>
+            <p>Consumo de combustible: La estrella se dedica exclusivamente a transformar hidrógeno en helio en su núcleo. Cuanto más masiva es una estrella, más rápido quema su combustible; las estrellas gigantes consumen su reserva en pocos millones de años, mientras que las pequeñas (enanas rojas) lo hacen a un ritmo tan lento que pueden durar billones de años.</p>
+
+            <p>
+                <strong>Dato científico:</strong>
+                Las estrellas más pequeñas del universo (las enanas rojas) son tan eficientes administrando su combustible que tienen una esperanza de vida estimada de billones de años (cientos de veces la edad actual del universo). De hecho, ni una sola enana roja nacida desde el Big Bang ha muerto todavía; ¡todas las que se han formado siguen vivas hoy en día!
+            </p>
+        </section>
+
+        <section>
+            <h2>3. Muerte de las estrellas</h2>
+
+            <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1000&q=80" alt="Etapa final de una estrella">
+
+            <p>El destino final de una estrella depende enteramente de su masa inicial. Al agotarse el hidrógeno de su núcleo, la estrella entra en su etapa final:</p>
+            <p>Estrellas de masa baja y media (como nuestro Sol): Al quedarse sin combustible en el núcleo, este se contrae y se calienta, mientras las capas externas se expanden enormemente, convirtiendo a la estrella en una gigante roja. Con el tiempo, las capas exteriores se desprenden suavemente formando una hermosa nebulosa planetaria, dejando en el centro un remanente denso, caliente y moribundo llamado enana blanca (que tardará billones de años en enfriarse por completo).</p>
+            <p>Estrellas masivas (8 veces o más la masa del Sol): Su evolución es mucho más violenta. Al agotar el hidrógeno, fusionan elementos cada vez más pesados (helio, carbono, oxígeno, hasta llegar al hierro). Como el hierro no puede liberar energía mediante fusión, el núcleo colapsa en fracciones de segundo y rebota en una explosión cataclísmica descomunal llamada supernova.</p>
+            <p>Remanentes estelares masivos: Tras la supernova, lo que queda puede ser una ultra densa estrella de neutrones (donde una sola cucharadita de su materia pesaría millones de toneladas en la Tierra) o, si la estrella original era extremadamente masiva, un agujero negro.</p>
+
+            <p>
+                <strong>Dato científico:</strong>
+                Todos los elementos químicos más pesados que el hierro que existen en el universo incluidos el oro de tus joyas, el platino y el oro de los circuitos electrónicos solo se han podido forjar gracias a la energía extrema liberada durante la violenta muerte de estrellas masivas en explosiones de supernova o en la colisión de estrellas de neutrones. ¡Literalmente estamos hechos de polvo de estrellas!
+            </p>
+        </section>
+
+        <div class="navegacion-paginas">
+            <a class="boton secundario" href="#inicio"
+               onclick="mostrarPagina('inicio')">Volver a Inicio</a>
+
+            <a class="boton" href="#informacion"
+               onclick="mostrarPagina('informacion')">Siguiente página</a>
+        </div>
+    </main>
+</div>
+
+<!-- PÁGINA 3: INFORMACIÓN ADICIONAL -->
+
+<div id="informacion" class="pagina">
+
+    <div class="marquesina"><span>✦ ¡Conoce más sobre los secretos del universo! ✦</span></div>
+
+    <main>
+        <h2>Información adicional</h2>
+
+        <section>
+            <h2>Curiosidades</h2>
+
+            <table border="1" cellpadding="8" cellspacing="0">
+              <tr>
+                <th>Fenómeno</th>
+                <th>Dato curioso</th>
+              </tr>
+              <tr>
+                <td><b>Estrellas zombis</b></td>
+                <td>Enanas blancas que "roban" gas a otra estrella para provocar una explosión y revivir temporalmente.</td>
+              </tr>
+              <tr>
+                <td><b>El diamante gigante</b></td>
+                <td>La estrella <i>Lucy</i> (BPM 37093), cuyo núcleo es un diamante del tamaño de la Tierra.</td>
+              </tr>
+              <tr>
+                <td><b>Lluvia de diamantes</b></td>
+                <td>En Júpiter y Saturno la alta presión convierte el metano en lluvia de diamantes reales.</td>
+              </tr>
+              <tr>
+                <td><b>Estrellas hiperveloces</b></td>
+                <td>Estrellas expulsadas por agujeros negros que viajan a millones de km/h por el espacio.</td>
+              </tr>
+              <tr>
+                <td><b>El olor del espacio</b></td>
+                <td>Los trajes espaciales huelen a metal caliente y carne quemada por el polvo de estrellas muertas.</td>
+              </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Comparación de las estrellas</h2>
+
+            <p>
+                Las estrellas azules tienen temperaturas superficiales
+                más altas que las estrellas rojas. Las estrellas más
+                masivas suelen vivir menos tiempo.
+            </p>
+            
+            <p><b>Ejemplos de estrellas en el universo</b></p>
+
+            <table border="1" cellpadding="8" cellspacing="0">
+              <tr>
+                <th>Categoría</th>
+                <th>Ejemplos reales</th>
+                <th>Característica principal</th>
+              </tr>
+              <tr>
+                <td><b>Supergigante azul</b></td>
+                <td>Rigel (en Orión) / Deneb</td>
+                <td>Estrellas extremadamente masivas, luminosas y de vida corta.</td>
+              </tr>
+              <tr>
+                <td><b>Gigante roja</b></td>
+                <td>Betelgeuse / Aldebarán</td>
+                <td>Estrellas en su fase final que se han expandido y enfriado.</td>
+              </tr>
+              <tr>
+                <td><b>Estrella amarilla (Secuencia Principal)</b></td>
+                <td>El Sol / Alfa Centauri A</td>
+                <td>Estrellas estables que fusionan hidrógeno en helio en su núcleo.</td>
+              </tr>
+              <tr>
+                <td><b>Enana roja</b></td>
+                <td>Próxima Centauri / Trappist-1</td>
+                <td>Las más pequeñas y abundantes; pueden durar billones de años.</td>
+              </tr>
+              <tr>
+                <td colspan="3" align="center"><i>Cada tipo representa una etapa o tamaño diferente en la evolución estelar.</i></td>
+              </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Descubrimientos</h2>
+
+            <p>
+                Con telescopios terrestres y espaciales, los científicos
+                estudian las estrellas para conocer su composición,
+                temperatura, edad y evolución.
+            </p>
+        </section>
+
+        <section>
+            <h2>Glosario</h2>
+            <ul>
+              <li><b>Nebulosa molecular:</b> Gigantesca nube de gas y polvo interestelar (principalmente hidrógeno y helio) de donde nacen las estrellas.</li>
+              <li><b>Protoestrella:</b> Etapa temprana en la formación de una estrella, cuando el gas se contrae y calienta antes de iniciar la fusión nuclear.</li>
+              <li><b>Secuencia Principal:</b> La etapa más larga y estable de la vida de una estrella, donde fusiona hidrógeno en helio en su núcleo.</li>
+              <li><b>Gigante roja:</b> Fase avanzada en la vida de una estrella de masa media cuando agota su combustible y se expande enormemente.</li>
+              <li><b>Supernova:</b> Explosión cataclísmica y violenta con la que mueren las estrellas masivas, liberando una energía colosal.</li>
+              <li><b>Enana blanca:</b> Remanente denso, caliente y moribundo que queda tras la muerte de una estrella de baja o media masa.</li>
+              <li><b>Estrella de neutrones:</b> Remanente ultra denso formado tras el colapso de una estrella muy masiva; una cucharadita de su materia pesa millones de toneladas.</li>
+              <li><b>Agujero negro:</b> Región del espacio con un campo gravitacional tan intenso que nada, ni siquiera la luz, puede escapar de él.</li>
+            </ul>
+            <p align="center"><i>Conceptos clave para entender el ciclo de vida estelar.</i></p>
+        </section>
+
+        <section>
+            <h2>Sitios que puedes visitar</h2>
+            <ul>
+                <li>
+                    <a href="https://science.nasa.gov/universe/stars/"
+                       target="_blank" rel="noopener">
+                        NASA: las estrellas
+                    </a>
+                </li>
+                <li>
+                    <a href="https://es.wikipedia.org/wiki/Estrella"
+                       target="_blank" rel="noopener">
+                        Información general sobre las estrellas
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <div class="navegacion-paginas">
+            <a class="boton secundario" href="#inicio"
+               onclick="mostrarPagina('inicio')">Volver a Inicio</a>
+            <a class="boton" href="#contacto"
+               onclick="mostrarPagina('contacto')">Ir a Contacto</a>
+        </div>
+    </main>
+</div>
+
+<!-- PÁGINA 4: CONTACTO -->
+
+<div id="contacto" class="pagina">
+    <main>
+        <h2>Contacto</h2>
+
+        <p>Comparte tus dudas y comentarios.</p>
+
+        <section>
+            <h2>Formulario de contacto</h2>
+
+            <form onsubmit="enviarFormulario(event)">
+
+                <label for="nombre">Nombre:</label>
+                <input type="text"
+                       id="nombre"
+                       name="nombre"
+                       placeholder="Escribe tu nombre"
+                       required>
+
+                <label for="correo">Correo electrónico:</label>
+                <input type="email"
+                       id="correo"
+                       name="correo"
+                       placeholder="Escribe tu correo"
+                       required>
+
+                <label for="consulta">Consulta o comentario:</label>
+                <textarea id="consulta"
+                          name="consulta"
+                          rows="5"
+                          placeholder="Escribe tu mensaje"
+                          required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+
+            <p id="mensaje" class="mensaje" aria-live="polite"></p>
+
+            <p>
+                Gracias por visitar nuestra página sobre las estrellas.
+            </p>
+        </section>
+
+        <a class="boton" href="#inicio"
+           onclick="mostrarPagina('inicio')">
+            Volver al inicio
+        </a>
+    </main>
+</div>
+
+<footer>
+    <p>El ciclo de vida de las estrellas | Proyecto escolar</p>
+</footer>
+
+<script>
+function mostrarPagina(id, enlace) {
+    const paginas = document.querySelectorAll(".pagina");
+    const enlaces = document.querySelectorAll("nav a");
+
+    paginas.forEach(function(pagina) {
+        pagina.classList.remove("activa");
+    });
+
+    enlaces.forEach(function(item) {
+        item.classList.remove("activo");
+    });
+
+    document.getElementById(id).classList.add("activa");
+
+    if (enlace) {
+        enlace.classList.add("activo");
+    } else {
+        enlaces.forEach(function(item) {
+            if (item.getAttribute("href") === "#" + id) {
+                item.classList.add("activo");
+            }
+        });
+    }
+
+    window.scrollTo(0, 0);
+}
+
+function enviarFormulario(event) {
+    event.preventDefault();
+    event.target.reset();
+}
+</script>
+</body>
+</html>
